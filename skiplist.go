@@ -1,4 +1,4 @@
-package skiplist
+package main
 
 import (
 	"fmt"

@@ -1,34 +1,34 @@
 package main
 
-// XFastTrieNode defines x fast trie node
-type XFastTrieNode struct {
-	child []*XFastTrieNode
-	jump  *XFastTrieNode
+// BinaryTrieNode defines a binary trie node
+type BinaryTrieNode struct {
+	child []*BinaryTrieNode
+	jump  *BinaryTrieNode
 	value uint64
-	parent *XFastTrieNode
+	parent *BinaryTrieNode
 }
 
-func NewXFastTrieNode() *XFastTrieNode {
-	return &XFastTrieNode{
-		child : make([]*XFastTrieNode, 2),
+func NewBinaryTrieNode() *BinaryTrieNode {
+	return &BinaryTrieNode{
+		child : make([]*BinaryTrieNode, 2),
 	}
 }
 
-type XFastTrie struct {
+type BinaryTrie struct {
 	w    int
-	root *XFastTrieNode
+	root *BinaryTrieNode
 }
 
-func NewXFastTrie() *XFastTrie {
-	return &XFastTrie{
+func NewBinaryTrie() *BinaryTrie {
+	return &BinaryTrie{
 		w: 64,
-		root: &XFastTrieNode{
-			child: make([]*XFastTrieNode, 2),
+		root: &BinaryTrieNode{
+			child: make([]*BinaryTrieNode, 2),
 		},
 	}
 }
 
-func (trie *XFastTrie) Find(x uint64) int64 {
+func (trie *BinaryTrie) Find(x uint64) int64 {
 	var (
 		i int
 		c uint64
@@ -60,7 +60,7 @@ func (trie *XFastTrie) Find(x uint64) int64 {
 	return -1
 }
 
-func (trie *XFastTrie) Remove(x uint64) bool {
+func (trie *BinaryTrie) Remove(x uint64) bool {
 	var (
 		i int
 		c uint64
@@ -107,7 +107,7 @@ func (trie *XFastTrie) Remove(x uint64) bool {
 	return true
 }
 
-func (trie *XFastTrie) Add(x uint64) bool {
+func (trie *BinaryTrie) Add(x uint64) bool {
 	var (
 		i int
 		c uint64
@@ -127,7 +127,7 @@ func (trie *XFastTrie) Add(x uint64) bool {
 		return false
 	}
 
-	var pred *XFastTrieNode
+	var pred *BinaryTrieNode
 	if c == 1 {
 		pred = u.jump
 	} else if u.jump != nil {
@@ -136,7 +136,7 @@ func (trie *XFastTrie) Add(x uint64) bool {
 
 	for ; i < trie.w; i++ {
 		c = (x >> (trie.w-i-1))	 & 1
-		u.child[c] = NewXFastTrieNode()
+		u.child[c] = NewBinaryTrieNode()
 		u.child[c].parent = u
 		u = u.child[c]
 	}

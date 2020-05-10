@@ -8,7 +8,7 @@ import (
 
 func BenchmarkXFastTrie(b *testing.B) {
 	start := time.Now()
-	trie := NewXFastTrie()
+	trie := NewBinaryTrie()
 	var i uint64
 	var numSeeds uint64
 	numSeeds = 10000
